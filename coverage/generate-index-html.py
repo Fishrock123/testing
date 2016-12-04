@@ -69,15 +69,15 @@ with open('out/index.html', 'w') as out:
             </div>
 ''')
   for line in reversed(index_csv):
-    jscov, cxxcov, date, sha = line.split(',')
+    date, sha = line.split(',')
     date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S%fZ').strftime("%d/%m/%Y %H:%M")
     out.write('''
             <div class="table-row">
               <div>{0}</div>
               <div class="sha"><a href="https://github.com/nodejs/node/commit/{1}">{1}</a></div>
-              <div><a href="coverage-{1}/index.html">{2:05.2f}&nbsp;%</a></div>
-              <div><a href="coverage-{1}/cxxcoverage.html">{3:05.2f}&nbsp;%</a></div>
-            </div>'''.format(date, sha, float(jscov), float(cxxcov)))
+              <div><a href="coverage-{1}/index.html">?&nbsp;%</a></div>
+              <div><a href="coverage-{1}/cxxcoverage.html">?&nbsp;%</a></div>
+            </div>'''.format(date, sha))
   out.write('''
           </div>
         </div>
